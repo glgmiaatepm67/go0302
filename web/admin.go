@@ -42,3 +42,12 @@ func (h *adminHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		writeJSONError(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusOK) // fix
 	}
 }
+
+func (h *adminHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		adminGet(h.backend, w, r)
+	default:
+		writeJSONError(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusOK) // fix
+	}
+}
